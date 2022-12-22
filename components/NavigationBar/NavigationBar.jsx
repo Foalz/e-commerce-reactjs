@@ -7,11 +7,14 @@ import {
   Menu,
   MenuItem,
   Toolbar, 
+  TextField,
   Typography,
 } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 const pages = [ 'Shop', 'About', 'FAQ', 'Contact' ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
 
 export default function NavigationBar(){
   const [state, setState] = useState();
@@ -22,7 +25,7 @@ export default function NavigationBar(){
 
   return(
     <>
-      <Box sx={{ flexGrow: 1 }} color="primary">
+      <Box color="primary">
         <AppBar position="sticky" color="primary" elevation={0}>
           <Toolbar color="primary">
             <Typography 
@@ -40,7 +43,7 @@ export default function NavigationBar(){
             >
               Logo
             </Typography>
-            <Box>
+            <Box sx={{ flexGrow: 1, }}>
               {pages.map((page, key) => {
                 return (
                   <Button color="secondary" variant="text">
@@ -48,6 +51,10 @@ export default function NavigationBar(){
                   </Button>
                 )
               })}
+            </Box>
+            <Box>
+              <SearchIcon sx={{ height: "100%" }} />
+              <TextField sx={{ height: "auto" }} label="Search" variant="standard" />
             </Box>
           </Toolbar>
         </AppBar>

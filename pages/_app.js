@@ -2,6 +2,21 @@ import '../styles/globals.css'
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
 const theme = createTheme({
+  components:{
+    MuiButton:{
+      styleOverrides:{
+        root:{
+          fontWeight: "bold",
+          textTransform: "capitalize",
+        }
+      },
+    },
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      }
+    }
+  },
   palette:{
     primary: {
       main: '#fff',
