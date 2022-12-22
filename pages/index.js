@@ -1,34 +1,13 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import { useState, useEffect } from 'react'
+import Head from "next/head"
+import Image from "next/image"
+import { Inter } from "@next/font/google"
+import { useState, useEffect } from "react"
+import NavigationBar from "../components/NavigationBar/NavigationBar";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] })
 
 
 export default function Home() {
-  const [data, setData] = useState();
-  const [dataLoaded, setDataLoaded] = useState(false);
-
-  async function getData() {
-    const res = await fetch('https://fakestoreapi.com/products/1');
-    const value = await res.json();
-    setData(value);
-    setDataLoaded(true);
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  if (!dataLoaded){
-    return (
-        <>
-          <div>Loading data...</div>
-        </>
-      )
-
-  }
   return(
     <>
       <Head>
@@ -38,11 +17,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div>
-          <Image src={`${data.image}`} width={900} height={900} />
-        </div>
+        <NavigationBar />
       </main>
     </>
-
   )
 }

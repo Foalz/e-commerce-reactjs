@@ -2,8 +2,13 @@ import '../styles/globals.css'
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
 const theme = createTheme({
-  main: {
-    primary: "#fff",
+  palette:{
+    primary: {
+      main: '#fff',
+    },
+    secondary: {
+      main: "#121212",
+    }
   }
 })
 
