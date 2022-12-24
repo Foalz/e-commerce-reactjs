@@ -8,6 +8,24 @@ const theme = createTheme({
         root:{
           fontWeight: "bold",
           textTransform: "capitalize",
+          backgroundColor: "transparent",
+
+          "&:hover": {
+            backgroundColor: "transparent",
+          },
+        }
+      },
+    },
+    MuiIconButton:{
+      styleOverrides:{
+        root:{
+          fontWeight: "bold",
+          textTransform: "capitalize",
+          backgroundColor: "transparent",
+
+          "&:hover": {
+            backgroundColor: "transparent",
+          },
         }
       },
     },
