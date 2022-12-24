@@ -9,6 +9,7 @@ const theme = createTheme({
           fontWeight: "bold",
           textTransform: "capitalize",
           backgroundColor: "transparent",
+          color: "#121212",
 
           "&:hover": {
             backgroundColor: "transparent",
@@ -22,6 +23,7 @@ const theme = createTheme({
           fontWeight: "bold",
           textTransform: "capitalize",
           backgroundColor: "transparent",
+          color: "#121212",
 
           "&:hover": {
             backgroundColor: "transparent",

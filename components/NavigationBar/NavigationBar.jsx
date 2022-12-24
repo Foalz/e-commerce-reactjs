@@ -4,19 +4,26 @@ import { AppBar } from "@mui/material";
 import {
   Box,
   Button,
-  Menu,
+  Drawer,
   Grid,
-  MenuItem,
-  InputBase,
   IconButton,
-  Toolbar, 
+  InputBase,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  ListItemIcon,
+  Menu,
+  MenuItem,
   TextField,
+  Toolbar, 
   Typography,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CloseIcon from '@mui/icons-material/Close';
 
 const pages = [ 'Shop', 'About', 'FAQ', 'Contact' ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -39,11 +46,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ( {
 }));
 
 export default function NavigationBar(){
-  const [state, setState] = useState();
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-  useEffect(()=>{
-
-  },[]);
+  const openDrawer = (e) => {
+    setDrawerOpen(true);
+  };
+  
+  const closeDrawer = (e) => {
+    setDrawerOpen(false);
+  };
 
   return(
     <>
@@ -76,7 +87,7 @@ export default function NavigationBar(){
                 }}>
                   {pages.map((page, key) => {
                     return (
-                      <Button color="secondary" variant="text">
+                      <Button key={key} color="secondary" variant="text">
                         {page}
                       </Button>
                     )
@@ -90,7 +101,7 @@ export default function NavigationBar(){
                   <IconButton>
                     <ShoppingCartIcon />
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={openDrawer}>
                     <MenuIcon /> 
                   </IconButton>
                 </Box>
@@ -103,7 +114,7 @@ export default function NavigationBar(){
                 <IconButton sx={{
                   display: { xs: "none", sm: "none", md: "flex" },
                 }}>
-                  <AccountCircleIcon />
+                  <AccountCircleIcon sx={{ marginRight: 1, }} />
                   <Typography>Log In</Typography>
                 </IconButton>
                 <IconButton sx={{
@@ -115,6 +126,32 @@ export default function NavigationBar(){
             </Grid>
          </Toolbar>
         </AppBar>
+        <Drawer open={drawerOpen} anchor="right">
+          <Box sx={{ width: "100vw" }}>
+            <Grid container>
+              <Grid item xs={6}>
+                <IconButton>
+                  <AccountCircleIcon sx={{ marginRight: 1, }} />
+                  <Typography>Log In</Typography>
+                </IconButton>
+              </Grid>
+              <Grid item xs={6} sx={{ display: "flex", justifyContent: "right" }}>
+                <IconButton onClick={closeDrawer}>
+                  <CloseIcon />
+                </IconButton>
+              </Grid>
+              </Grid>
+            <List>
+              {pages.map((text, index) => (
+                <ListItem key={text} disablePadding>
+                  <ListItemButton>
+                    <ListItemText primary={text} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </Drawer>
       </Box>
     </>
   )
