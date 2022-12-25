@@ -3,6 +3,7 @@ import Image from "next/image"
 import { Inter } from "@next/font/google"
 import { useState, useEffect } from "react"
 import NavigationBar from "../components/NavigationBar/NavigationBar";
+import Products from "../components/ProductsList/Products";
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -18,6 +19,7 @@ export default function Home() {
       </Head>
       <main>
         <NavigationBar />
+        <Products />
       </main>
     </>
   )
