@@ -43,6 +43,9 @@ const theme = createTheme({
     },
     secondary: {
       main: "#121212",
+    },
+    shadow:{
+      main: "#e0e0e0",
     }
   }
 })

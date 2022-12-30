@@ -1,9 +1,12 @@
 import Head from "next/head"
-import Image from "next/image"
 import { Inter } from "@next/font/google"
-import { useState, useEffect } from "react"
 import NavigationBar from "../components/NavigationBar/NavigationBar";
 import Products from "../components/ProductsList/Products";
+import Footer from "../components/Footer/Footer";
+import {
+  Box,
+} from "@mui/material";
+
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -19,7 +22,12 @@ export default function Home() {
       </Head>
       <main>
         <NavigationBar />
+        <Box
+        >
+          Hello
+        </Box>
         <Products />
+        <Footer />
       </main>
     </>
   )
