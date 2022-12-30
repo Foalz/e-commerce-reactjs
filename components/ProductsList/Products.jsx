@@ -21,13 +21,20 @@ import StarIcon from '@mui/icons-material/Star';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
-  height: "100%",
+  height: "350px",
   boxShadow: "0px 0px 0px transparent",
   border: `1px solid #e0e0e0`,
   cursor: "pointer",
+  transition: "height .2s linear",
 
   "&:hover": {
-    boxShadow: `2px 2px 25px ${theme.palette.shadow.main}CC`
+    boxShadow: `2px 2px 25px ${theme.palette.shadow.main}CC`,
+    height: "370px",
+  },
+  "&:hover #product-title":{
+    transform: "translate(0, 0)",
+    opacity: 1,
+    height: "100%",
   }
 }));
 
@@ -126,11 +133,11 @@ export default function Products(){
   }
   return(
     <>
-      <Grid sx={{ padding: 8, }} spacing={10} container>
+      <Grid sx={{ padding: 8, }} spacing={6} container>
         {
           products.map((product, key) => {
             return(
-              <Grid key={key} item xs={12} sm={6} md={4} lg={3}>
+              <Grid sx={{ height: "400px" }} key={key} item xs={12} sm={6} md={4} lg={3}>
                 <StyledCard>
                   <CardMedia
                     component="img"
@@ -140,16 +147,48 @@ export default function Products(){
                     alt="product"
                   />
                   <StyledDivider />
-                  <CardContent sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", }}>
-                    <Typography sx={{ textAlign: "center", fontWeight: "bold", marginBottom: 1, }}>
-                      Product
-                    </Typography>
-                    <StyledDivider variant="middle" />
+                  <CardContent sx={{
+                    display: "flex", 
+                    flexDirection: "column", 
+                    justifyContent: "center", 
+                    alignItems: "center", 
+
+                  }}>
+                    <Box
+                      component="div"
+                      sx={{
+                        display: "flex",
+                        alignItems: "left",
+                        width: "100%",
+                      }}
+                    >
+                      <Typography sx={{ 
+                        textAlign: "left", 
+                        fontSize: "35px",
+                      }}>
+                        { product.price }$
+                      </Typography>
+                    </Box>
                     <Box>
                       <Stars rate={product.rating.rate} count={product.rating.count} />
                     </Box>
-                    <Typography sx={{ textAlign: "center", marginBottom: 1, }}>{ product.price }$</Typography>
-                    <StyledButton onClick={(e) => { openModal(product) }}>Add to cart</StyledButton>
+                    <Box
+                      sx={{
+                        overflow: "hidden",
+                        display: "flex",
+                      }}
+                    >
+                      <Typography id="product-title" sx={{ 
+                        textAlign: "center", 
+                        marginBottom: 1, 
+                        height: 0,
+                        transform: "translate(0, -100%)",
+                        opacity: "0",
+                        transition: "opacity .2s, height .2s, transform .2s linear",
+                      }}>
+                        {product.title}
+                      </Typography>
+                    </Box>
                   </CardContent>
                 </StyledCard>
               </Grid>
