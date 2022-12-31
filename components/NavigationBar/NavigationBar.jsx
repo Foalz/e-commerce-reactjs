@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { styled, alpha } from "@mui/material/styles";
-import { AppBar } from "@mui/material";
+import { AppBar, Icon } from "@mui/material";
 import {
   Box,
   Button,
@@ -28,21 +28,27 @@ import CloseIcon from '@mui/icons-material/Close';
 const pages = [ 'Shop', 'About', 'FAQ', 'Contact' ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
+const handleSubmit = (e) => {
+  e.preventDefault();
+  console.log(e);
+}
+
 const Search = styled('div')(({ theme }) => ({
   position: "relative",
-  borderBottom: `1px solid ${ theme.palette.secondary.main }`,
+  borderBottom: `1px solid ${ theme.palette.primary.main }`,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   width: "200px",
+  transition: "all .1s ease", 
 
   "&:hover": {
-    borderBottom: `2px solid ${ theme.palette.secondary.main }`,
-  }
+    boxShadow: "0px 2px 0px #fff",
+  },
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ( {
-  fontWeight: "600", 
+  color: theme.palette.primary.main,
 }));
 
 export default function NavigationBar(){
@@ -58,28 +64,34 @@ export default function NavigationBar(){
 
   return(
     <>
-      <Box color="primary">
-        <AppBar position="sticky" color="primary" elevation={0}>
+      <Box color="secondary">
+        <AppBar position="sticky" color="secondary" elevation={0}>
           <Toolbar color="primary">
-            <Grid container sx={{ display: "flex", justifyContent: "center", alignItems: "center", }}>
-              <Grid item xs={6} sm={6} md={4}>
+
+            <Grid container sx={{ display: "flex", alignItems: "center", width: "100%" }}>
+
+              <Grid item xs={6} sm={4} md={4} sx={{ width: "25%", flexGrow: 1, }}>
                 <Typography 
                   variant="h6" 
                   noWrap
                   component="div"
                   sx={{ 
                     flexGrow: 1, 
-                    display: { sm: 'block' }, 
                     fontWeight: 'bold', 
                       '&:hover': {
-                        color: '#000',
+                        color: 'primary.main',
                       }
                   }}
                 >
                   Logo
                 </Typography>
               </Grid>
-              <Grid item xs={6} sm={6} md={4}>
+
+              <Grid item xs={6} sm={4} md={4}
+                sx={{
+                  display: { xs: "none", sm: "none", md: "block" },
+                }}
+              >
                 <Box sx={{ 
                   display: { xs: "none", sm: "none", md: "block" },
                   flexGrow: 1, 
@@ -87,45 +99,64 @@ export default function NavigationBar(){
                 }}>
                   {pages.map((page, key) => {
                     return (
-                      <Button key={key} color="secondary" variant="text">
+                      <Button key={key} color="primary" variant="text">
                         {page}
                       </Button>
                     )
                   })}
                 </Box>
+
+              </Grid>
+
+              <Grid item xs={6} sm={4} md={4} sx={{ display: "flex", width: "75%", justifyContent: "center", alignItems: "center" }}>
+                <Box>
+                  <form onSubmit={handleSubmit}>
+                    <Search>
+                      <IconButton type="submit">
+                        <SearchIcon sx={{ color: "primary.main", height: "100%" }} /> 
+                      </IconButton>
+                      <StyledInputBase placeholder="Search..."/>
+                    </Search>
+                  </form>
+                </Box>
+                
+                <Box sx={{ display: { xs: "none", sm: "none", md: "flex" }, flexDirection: "row", }}>
+                  <IconButton sx={{
+                    display: { xs: "none", sm: "none", md: "flex" },
+                  }}>
+                    <AccountCircleIcon sx={{ color: "primary.main", marginRight: 1, }} />
+                    <Typography color="primary">Log In</Typography>
+                  </IconButton>
+
+                  <IconButton sx={{
+                    display: { xs: "none", sm: "none", md: "flex" },
+                    color: "primary.main",
+                  }}>
+                    <ShoppingCartIcon />
+                  </IconButton>
+                </Box>
+
+                { /*Responsive mode buttons*/ }
                 <Box sx={{ 
                   display: { xs: "flex", sm: "flex", md: "none" },
-                  flexGrow: 1, 
                   justifyContent: "right",
                 }}>
                   <IconButton>
-                    <ShoppingCartIcon />
+                    <ShoppingCartIcon color="primary" />
                   </IconButton>
                   <IconButton onClick={openDrawer}>
-                    <MenuIcon /> 
+                    <MenuIcon color="primary" /> 
                   </IconButton>
                 </Box>
+
               </Grid>
-              <Grid item xs={12} sm={12} md={4} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <Search>
-                  <SearchIcon sx={{ height: "100%" }} />
-                  <StyledInputBase placeholder="Search..."/>
-                </Search>
-                <IconButton sx={{
-                  display: { xs: "none", sm: "none", md: "flex" },
-                }}>
-                  <AccountCircleIcon sx={{ marginRight: 1, }} />
-                  <Typography>Log In</Typography>
-                </IconButton>
-                <IconButton sx={{
-                  display: { xs: "none", sm: "none", md: "flex" },
-                }}>
-                  <ShoppingCartIcon />
-                </IconButton>
-              </Grid>
+
             </Grid>
+
          </Toolbar>
         </AppBar>
+
+        { /*Only shown in responsive mode*/ }
         <Drawer open={drawerOpen} anchor="right">
           <Box sx={{ width: "100vw" }}>
             <Grid container>
@@ -143,9 +174,9 @@ export default function NavigationBar(){
               </Grid>
             <List>
               {pages.map((text, index) => (
-                <ListItem key={text} disablePadding>
+                <ListItem key={index} disablePadding>
                   <ListItemButton>
-                    <ListItemText primary={text} />
+                    <ListItemText sx={{ color: "primary.main" }} primary={text} />
                   </ListItemButton>
                 </ListItem>
               ))}

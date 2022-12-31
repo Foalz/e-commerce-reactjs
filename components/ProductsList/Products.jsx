@@ -21,11 +21,10 @@ import StarIcon from '@mui/icons-material/Star';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
-  height: "350px",
   boxShadow: "0px 0px 0px transparent",
   border: `1px solid #e0e0e0`,
   cursor: "pointer",
-  transition: "height .2s linear",
+  transition: `height ${ theme.transitions.time } linear`,
 
   "&:hover": {
     boxShadow: `2px 2px 25px ${theme.palette.shadow.main}CC`,
@@ -77,6 +76,8 @@ const Stars = ({ ...props }) => {
       sx={{
         display: "flex",
         marginBottom: 1,
+        justifyContent: "center",
+        alignItems: "top",
       }}
     >
       {
@@ -88,7 +89,9 @@ const Stars = ({ ...props }) => {
           ) 
         })
       }
-      ( { count } )
+      <Typography>
+        ( { count } )
+      </Typography>
     </Box>
   )
 
@@ -138,7 +141,11 @@ export default function Products(){
           products.map((product, key) => {
             return(
               <Grid sx={{ height: "400px" }} key={key} item xs={12} sm={6} md={4} lg={3}>
-                <StyledCard>
+                <StyledCard
+                  sx={{
+                    height: { xs: "370px", sm: "370px", md: "370px", lg: "350px", },
+                  }}
+                >
                   <CardMedia
                     component="img"
                     height="216"
@@ -164,12 +171,18 @@ export default function Products(){
                     >
                       <Typography sx={{ 
                         textAlign: "left", 
-                        fontSize: "35px",
+                        fontSize: "25px",
                       }}>
-                        { product.price }$
+                        US$ { product.price }
                       </Typography>
                     </Box>
-                    <Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "left",
+                        width: "100%"
+                      }}
+                    >
                       <Stars rate={product.rating.rate} count={product.rating.count} />
                     </Box>
                     <Box
@@ -181,9 +194,9 @@ export default function Products(){
                       <Typography id="product-title" sx={{ 
                         textAlign: "center", 
                         marginBottom: 1, 
-                        height: 0,
-                        transform: "translate(0, -100%)",
-                        opacity: "0",
+                        height: { xs: "100%", sm: "100%", md: "100%", lg: 0, },
+                        transform: { xs: "translate(0)", sm: "translate(0)", md: "translate(0)", lg: "translate(0, -100%)" },
+                        opacity: { xs: 1, sm: 1, md: 1, lg: 0,},
                         transition: "opacity .2s, height .2s, transform .2s linear",
                       }}>
                         {product.title}

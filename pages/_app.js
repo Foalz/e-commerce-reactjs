@@ -47,6 +47,9 @@ const theme = createTheme({
     shadow:{
       main: "#e0e0e0",
     }
+  },
+  transitions: {
+    time: ".2s"
   }
 })
 

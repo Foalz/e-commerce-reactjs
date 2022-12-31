@@ -1,11 +1,16 @@
 import Head from "next/head"
+import Image from "next/image";
 import { Inter } from "@next/font/google"
 import NavigationBar from "../components/NavigationBar/NavigationBar";
 import Products from "../components/ProductsList/Products";
 import Footer from "../components/Footer/Footer";
 import {
   Box,
+  Grid,
+  Typography,
 } from "@mui/material";
+import bannerBackground from "../public/banner-background-1.jpg";
+import { useState, useEffect } from "react";
 
 
 const inter = Inter({ subsets: ["latin"] })
@@ -21,11 +26,78 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <NavigationBar />
-        <Box
+      <NavigationBar />
+
+      <Grid container>
+        <Grid 
+          item 
+          md={6}
+          lg={6}
+          sx={{
+            display: { xs: "none", sm: "none", md: "block", lg: "block" },
+            backgroundColor: "secondary.main", 
+          }}
         >
-          Hello
-        </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "left",
+              height: "100%",
+              p: 2,
+            }}
+          >
+            <Typography
+              variant="h3"
+              sx={{
+                color: "primary.main",
+                textTransform: "uppercase",
+                fontWeight: "bold",
+              }}
+            >
+              Find the highest            
+            </Typography>
+            <Typography
+              variant="h3"
+              sx={{
+                color: "primary.main",
+                textTransform: "uppercase",
+                fontWeight: "bold",
+              }}
+            >
+              quality products 
+            </Typography>
+            <Typography
+              variant="h3"
+              sx={{
+                color: "primary.main",
+                textTransform: "uppercase",
+                fontWeight: "bold",
+              }}
+            >
+              for all your trips 
+            </Typography>
+          </Box>
+        </Grid>
+        <Grid 
+          item 
+          md={6}
+          lg={6}
+          sx={{
+            display: { xs: "none", sm: "none", md: "block", lg: "block" },
+            overflow: "hidden",
+            height: 400,
+            backgroundImage: `url(/banner-background-1.jpg)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+
+        </Grid>
+      </Grid>
+      <Box>
+      </Box>
         <Products />
         <Footer />
       </main>
