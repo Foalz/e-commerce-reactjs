@@ -1,57 +1,15 @@
 import { useState, useEffect, } from "react";
-import Image from "next/image";
-import { styled, alpha } from "@mui/material/styles";
-
 import {
   Box,
-  Button,
-  Card,
-  Fade,
-  CardHeader,
-  CardMedia,
   CardContent,
-  CardActions,
-  Divider,
-  Modal,
+  CardMedia,
   Grid,
+  Modal,
+  Skeleton,
   Typography,
 } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
-
-
-const StyledCard = styled(Card)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.main,
-  boxShadow: "0px 0px 0px transparent",
-  border: `1px solid #e0e0e0`,
-  cursor: "pointer",
-  transition: `height ${ theme.transitions.time } linear`,
-
-  "&:hover": {
-    boxShadow: `2px 2px 25px ${theme.palette.shadow.main}CC`,
-    height: "370px",
-  },
-  "&:hover #product-title":{
-    transform: "translate(0, 0)",
-    opacity: 1,
-    height: "100%",
-  }
-}));
-
-const StyledDivider = styled(Divider)(({ theme }) => ({
-  borderColor: "#e0e0e0",
-}));
-
-const StyledButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  backgroundColor: theme.palette.secondary.main,
-  width: 180,
-  height: 35,
-  fontWeight: "bold",
-
-  "&:hover": {
-    backgroundColor: `${theme.palette.secondary.main}CC`,
-  }
-}));
+import { StyledCard, StyledDivider, StyledButton, } from "./StyledMuiComponents/StyledMuiComponents";
 
 const ModalContent = ({ ...props }) => {
   const { open, setOpen } = props;
@@ -97,7 +55,6 @@ const Stars = ({ ...props }) => {
 
 }
 
-
 export default function Products(){
 
   const [products, setProducts] = useState();
@@ -114,7 +71,6 @@ export default function Products(){
     try {
       const response = await fetch(process.env.NEXT_PUBLIC_PRODUCTS_DB);
       const json = await response.json();
-      console.log(json);
       setProducts(json);
       setDataLoaded(true);
     } catch (error) {
@@ -128,15 +84,28 @@ export default function Products(){
 
 
   if (!dataLoaded){
+    const minHeight = 400;
     return(
-      <div>
-        Loading data...
-      </div>
+      <>
+        <Box pt={1} sx={{ height: { xs: minHeight * 4, sm: minHeight* 2, md: minHeight * 2, lg: minHeight, } }}>
+          <Grid pt={4} pl={8} pr={8} pb={8} spacing={6} container height={400}>
+            { [... new Array(4)].map((el, index) => {
+              return(
+                <>
+                  <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+                    <Skeleton variant="rectangular" height={320} />
+                  </Grid>
+                </>
+              )
+            }) }
+          </Grid>
+        </Box>
+      </>
     )
   }
   return(
     <>
-      <Grid sx={{ padding: 8, }} spacing={6} container>
+      <Grid pt={4} pl={8} pr={8} pb={8} spacing={6} container>
         {
           products.map((product, key) => {
             return(

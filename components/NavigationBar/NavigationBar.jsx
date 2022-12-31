@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { styled, alpha } from "@mui/material/styles";
+import { Search, StyledInputBase } from "./StyledMuiComponents/StyledMuiComponents.jsx";
 import { AppBar, Icon } from "@mui/material";
 import {
   Box,
@@ -7,7 +7,6 @@ import {
   Drawer,
   Grid,
   IconButton,
-  InputBase,
   List,
   ListItem,
   ListItemButton,
@@ -33,23 +32,6 @@ const handleSubmit = (e) => {
   console.log(e);
 }
 
-const Search = styled('div')(({ theme }) => ({
-  position: "relative",
-  borderBottom: `1px solid ${ theme.palette.primary.main }`,
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  width: "200px",
-  transition: "all .1s ease", 
-
-  "&:hover": {
-    boxShadow: "0px 2px 0px #fff",
-  },
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ( {
-  color: theme.palette.primary.main,
-}));
 
 export default function NavigationBar(){
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -65,82 +47,65 @@ export default function NavigationBar(){
   return(
     <>
       <Box color="secondary">
-        <AppBar position="sticky" color="secondary" elevation={0}>
+        <AppBar position="fixed" color="secondary" elevation={0}>
           <Toolbar color="primary">
 
             <Grid container sx={{ display: "flex", alignItems: "center", width: "100%" }}>
 
-              <Grid item xs={6} sm={4} md={4} sx={{ width: "25%", flexGrow: 1, }}>
-                <Typography 
-                  variant="h6" 
-                  noWrap
-                  component="div"
+              <Grid item xs={4} sm={4} md={4}>
+                <Typography p={1} variant="h3" noWrap component="div" 
                   sx={{ 
                     flexGrow: 1, 
                     fontWeight: 'bold', 
-                      '&:hover': {
-                        color: 'primary.main',
-                      }
+                    '&:hover': {
+                      color: 'primary.main',
+                    }
                   }}
                 >
                   Logo
                 </Typography>
               </Grid>
 
-              <Grid item xs={6} sm={4} md={4}
-                sx={{
-                  display: { xs: "none", sm: "none", md: "block" },
-                }}
-              >
-                <Box sx={{ 
-                  display: { xs: "none", sm: "none", md: "block" },
-                  flexGrow: 1, 
-                  justifyContent: "right",
-                }}>
+              <Grid item xs={4} sm={4} md={4} sx={{ display: { xs: "none", sm: "none", md: "flex" }, justifyContent: "center", }}>
+                <Box sx={{ flexGrow: 1, }}>
                   {pages.map((page, key) => {
                     return (
                       <Button key={key} color="primary" variant="text">
-                        {page}
+                        <Typography color="primary">{ page }</Typography>
                       </Button>
                     )
                   })}
                 </Box>
-
               </Grid>
 
-              <Grid item xs={6} sm={4} md={4} sx={{ display: "flex", width: "75%", justifyContent: "center", alignItems: "center" }}>
+              <Grid item xs={4} sm={4} md={2} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                 <Box>
                   <form onSubmit={handleSubmit}>
                     <Search>
                       <IconButton type="submit">
-                        <SearchIcon sx={{ color: "primary.main", height: "100%" }} /> 
+                        <SearchIcon color="primary" sx={{ height: "100%" }} /> 
                       </IconButton>
                       <StyledInputBase placeholder="Search..."/>
                     </Search>
                   </form>
                 </Box>
+
+              </Grid>
+              <Grid item xs={4} sm={4} md={2}>
                 
-                <Box sx={{ display: { xs: "none", sm: "none", md: "flex" }, flexDirection: "row", }}>
-                  <IconButton sx={{
-                    display: { xs: "none", sm: "none", md: "flex" },
-                  }}>
-                    <AccountCircleIcon sx={{ color: "primary.main", marginRight: 1, }} />
+                <Box sx={{ display: { xs: "none", sm: "none", md: "flex" }, justifyContent: "right", flexDirection: "row", }}>
+                  <IconButton>
+                    <AccountCircleIcon color="primary" sx={{ marginRight: 1, }} />
                     <Typography color="primary">Log In</Typography>
                   </IconButton>
 
-                  <IconButton sx={{
-                    display: { xs: "none", sm: "none", md: "flex" },
-                    color: "primary.main",
-                  }}>
-                    <ShoppingCartIcon />
+                  <IconButton>
+                    <ShoppingCartIcon color="primary" />
                   </IconButton>
                 </Box>
 
                 { /*Responsive mode buttons*/ }
-                <Box sx={{ 
-                  display: { xs: "flex", sm: "flex", md: "none" },
-                  justifyContent: "right",
-                }}>
+                <Box sx={{ display: { xs: "flex", sm: "flex", md: "none" }, justifyContent: "right", }}>
                   <IconButton>
                     <ShoppingCartIcon color="primary" />
                   </IconButton>
@@ -158,17 +123,17 @@ export default function NavigationBar(){
 
         { /*Only shown in responsive mode*/ }
         <Drawer open={drawerOpen} anchor="right">
-          <Box sx={{ width: "100vw" }}>
+          <Box color="secondary" sx={{ width: "100vw" }}>
             <Grid container>
               <Grid item xs={6}>
                 <IconButton>
-                  <AccountCircleIcon sx={{ marginRight: 1, }} />
-                  <Typography>Log In</Typography>
+                  <AccountCircleIcon color="primary" sx={{ marginRight: 1, }} />
+                  <Typography color="primary">Log In</Typography>
                 </IconButton>
               </Grid>
               <Grid item xs={6} sx={{ display: "flex", justifyContent: "right" }}>
                 <IconButton onClick={closeDrawer}>
-                  <CloseIcon />
+                  <CloseIcon color="primary" />
                 </IconButton>
               </Grid>
               </Grid>

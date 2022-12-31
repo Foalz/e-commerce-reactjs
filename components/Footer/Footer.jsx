@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
 import {
   Box,
+  Typography,
 } from "@mui/material";
 
 export default function Footer(){
   return(
-    <>
+    <footer>
       <Box
         sx={{
-          backgroundColor: "#121212",
-          color: "#fff",
+          backgroundColor: "secondary.main",
+          color: "primary.main",
+          width: "100%",
+          textAlign: "center",
         }}
       >
-        Copyright © Foalz DEV 2022 
+        <Typography>Copyright © Foalz DEV { new Date().getFullYear() }</Typography>
       </Box>
-    </>
+    </footer>
   )
 }

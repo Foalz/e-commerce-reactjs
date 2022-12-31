@@ -3,6 +3,14 @@ import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
 const theme = createTheme({
   components:{
+     MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: "#121212",
+          color: "#fff",
+        }
+      }
+    },
     MuiButton:{
       styleOverrides:{
         root:{
