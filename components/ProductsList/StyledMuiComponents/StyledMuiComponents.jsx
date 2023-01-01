@@ -21,7 +21,7 @@ export const StyledCard = styled(Card)(({ theme }) => ({
 
   "&:hover": {
     boxShadow: `2px 2px 25px ${theme.palette.shadow.main}CC`,
-    height: "370px",
+    height: "390px",
   },
   "&:hover #product-title":{
     transform: "translate(0, 0)",

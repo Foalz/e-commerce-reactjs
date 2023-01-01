@@ -60,7 +60,7 @@ export default function Banner(){
           </Box>
         </Grid>
         <Grid 
-          item 
+          item
           md={6}
           lg={6}
           sx={{

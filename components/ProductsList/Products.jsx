@@ -42,8 +42,8 @@ const Stars = ({ ...props }) => {
         [...new Array(totalStars)].map((arr, index) => {
           return( 
             index < rate
-              ?( <StarIcon sx={{ ...sxProps, color: "#ffc107" }}/> )
-              :( <StarIcon sx={{ ...sxProps, color: "#a0a0a0" }}/> )
+              ?( <StarIcon key={index} sx={{ ...sxProps, color: "#ffc107" }}/> )
+              :( <StarIcon key={index} sx={{ ...sxProps, color: "#a0a0a0" }}/> )
           ) 
         })
       }
@@ -71,6 +71,7 @@ export default function Products(){
     try {
       const response = await fetch(process.env.NEXT_PUBLIC_PRODUCTS_DB);
       const json = await response.json();
+      console.log(json);
       setProducts(json);
       setDataLoaded(true);
     } catch (error) {
@@ -91,11 +92,9 @@ export default function Products(){
           <Grid pt={4} pl={8} pr={8} pb={8} spacing={6} container height={400}>
             { [... new Array(4)].map((el, index) => {
               return(
-                <>
-                  <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-                    <Skeleton variant="rectangular" height={320} />
-                  </Grid>
-                </>
+                <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+                  <Skeleton variant="rectangular" height={320} />
+                </Grid>
               )
             }) }
           </Grid>
@@ -119,7 +118,7 @@ export default function Products(){
                     component="img"
                     height="216"
                     width="150"
-                    image={product.image}
+                    image={process.env.NEXT_PUBLIC_API_IMAGES_URL + product.imageUrl}
                     alt="product"
                   />
                   <StyledDivider />
@@ -144,6 +143,15 @@ export default function Products(){
                       }}>
                         US$ { product.price }
                       </Typography>
+                    </Box>
+                    <Box sx={{ display: "flex", justifyContent: "left", width: "100%", flexDirection: "row", mb: 1,}}>
+                      { product.category.map((el, key) => {
+                        return (
+                          <Typography color="#fff" sx={{ background: el.color, fontSize: 11, borderRadius: 1, mr: 1, pl: 1, pr: 1, }} key={key}>
+                            {el.title}
+                          </Typography>
+                        ) 
+                      }) }
                     </Box>
                     <Box
                       sx={{
