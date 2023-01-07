@@ -118,7 +118,7 @@ export default function Products(){
                     component="img"
                     height="216"
                     width="150"
-                    image={process.env.NEXT_PUBLIC_API_IMAGES_URL + product.imageUrl}
+                    image={product.imageUrl}
                     alt="product"
                   />
                   <StyledDivider />
